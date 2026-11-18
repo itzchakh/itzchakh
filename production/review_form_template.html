@@ -77,7 +77,7 @@ textarea{width:100%;min-height:74px;border:1px solid var(--line);border-radius:6
 <h1>טופס תיקונים: היהלום שבכתר · סטוריבורד, קריינות ותמונות</h1>
 <p class="sub">כרטיס לכל שוט (__N__ שוטים, __TOTAL__): התזמון, שורות הקריינות עם הדובר והקול, חמשת השדות של הסטוריבורד, הפרומפט, הרפרנסים, ותמונות הפתיחה והסיום. בכל כרטיס יש שלושה חלקים נפרדים לריג'קטים: <b>סטוריבורד</b>, <b>קריינות</b> ו<b>תמונות</b>. הכול מסומן כרגע "תקין", עם הערות שלי היכן שבחרתי משהו לבד. לחיצה על "▶ נגן את השוט" מנגנת את הקטע מהגרסה הגסה. הכול נשמר אוטומטית בדפדפן, ובסיום לוחצים "הורדת הטופס המלא".</p>
 <div class="top">
-<div><video id="v" controls preload="metadata" src="../rough/__VIDEO__"></video><p class="sub" style="margin:6px 0 0;font-size:13px">הגרסה הגסה: התמונות על הקריינות, לפי תזמון הסטוריבורד. הקובץ צריך להישאר בתיקייה rough ליד תיקיית הטופס.</p></div>
+<div><video id="v" controls preload="metadata" src="../rough/__VIDEO__"></video><p class="sub" style="margin:6px 0 0;font-size:13px" id="vnote">הגרסה הגסה: התמונות על הקריינות, לפי תזמון הסטוריבורד. הקובץ צריך להישאר בתיקייה rough ליד תיקיית הטופס.</p></div>
 <div class="panel">
 <div class="segsel" id="segsel"></div>
 <div class="counts" id="counts"></div>
@@ -97,6 +97,7 @@ textarea{width:100%;min-height:74px;border:1px solid var(--line);border-radius:6
 <div class="lb" id="lb"><img id="lbimg" alt=""></div>
 <script>
 const DATA=__DATA__;
+const THUMBS=__THUMBS__;
 const KEY='diamond_review_v__V__';
 const SEGS={sb:'סטוריבורד',nar:'קריינות',img:'תמונות'};
 const LABEL={ok:'תקין',fix:'תיקון',replace:'להחליף'};
@@ -111,11 +112,12 @@ const fmt=t=>{const m=Math.floor(t/60),s=(t%60).toFixed(2).padStart(5,'0');retur
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const worst=d=>{const r=['ok','fix','replace'];return Object.keys(SEGS).map(k=>get(d,k).status).reduce((a,b)=>r.indexOf(b)>r.indexOf(a)?b:a,'ok')};
 const v=document.getElementById('v');
+v.addEventListener('error',()=>{document.getElementById('vnote').innerHTML='<b>הווידאו לא נטען.</b> פתח את הטופס מתוך התיקייה production/review בפרויקט, כדי שימצא את rough/__VIDEO__. כל השאר בטופס עובד גם בלעדיו.'},true);
 let filter='all',segf='all',stopAt=null,cur=null;
 function save(){try{localStorage.setItem(KEY,JSON.stringify(state));document.getElementById('saved').textContent='נשמר'}catch(e){document.getElementById('saved').textContent='השמירה האוטומטית לא זמינה: הורד את הטופס בסוף'}}
 v.addEventListener('timeupdate',()=>{if(stopAt!==null&&v.currentTime>=stopAt){v.pause();stopAt=null}});
 function play(d,el){v.currentTime=d.start;stopAt=d.end;v.play();document.querySelectorAll('.shot.playing').forEach(x=>x.classList.remove('playing'));el.classList.add('playing')}
-function imgFig(f,cap){return `<figure><img loading="lazy" src="../frames/${esc(f)}" alt="${esc(cap)}" data-full="../frames/${esc(f)}"><figcaption>${esc(cap)} · ${esc(f)}</figcaption></figure>`}
+function imgFig(f,cap){return `<figure><img loading="lazy" src="${THUMBS[f]||'../frames/'+esc(f)}" alt="${esc(cap)}" data-full="../frames/${esc(f)}" data-thumb="${esc(f)}"><figcaption>${esc(cap)} · ${esc(f)}</figcaption></figure>`}
 function segBox(d,k){
  const s=get(d,k);
  return `<div class="box ${s.status}" data-k="${k}"><h4>${SEGS[k]}</h4>
@@ -147,7 +149,7 @@ function render(){
    </div></div>
   <div class="rev">${Object.keys(SEGS).map(k=>segBox(d,k)).join('')}</div>`;
   c.querySelector('.play').onclick=()=>play(d,c);
-  c.querySelectorAll('img').forEach(i=>i.onclick=()=>{document.getElementById('lbimg').src=i.dataset.full;document.getElementById('lb').style.display='flex'});
+  c.querySelectorAll('img').forEach(i=>i.onclick=()=>{const L=document.getElementById('lbimg');L.onerror=()=>{L.onerror=null;L.src=THUMBS[i.dataset.thumb]};L.src=i.dataset.full;document.getElementById('lb').style.display='flex'});
   c.querySelectorAll('.box').forEach(b=>{const k=b.dataset.k;
    b.querySelectorAll('.seg input').forEach(i=>i.onchange=()=>{get(d,k).status=i.value;save();render();counts()});
    b.querySelectorAll('.flags input').forEach(i=>i.onchange=()=>{get(d,k).flags=[...b.querySelectorAll('.flags input:checked')].map(e=>e.value);save()});

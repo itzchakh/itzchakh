@@ -60,9 +60,22 @@ for sid, v in prom.items():
         "notes": {k: NOTES.get((sid, k), "") for k in ("sb", "nar", "img")},
     })
 
+# embed small thumbnails so the form works even when opened outside the project folder
+import base64, io
+from PIL import Image
+THUMBS = {}
+for d in DATA:
+    for f in d["first_img"] + d["last_img"]:
+        if f in THUMBS:
+            continue
+        im = Image.open(os.path.join(HERE, "frames", f)).convert("RGB")
+        im.thumbnail((720, 405))
+        b = io.BytesIO(); im.save(b, "JPEG", quality=78)
+        THUMBS[f] = "data:image/jpeg;base64," + base64.b64encode(b.getvalue()).decode()
 total = DATA[-1]["end"]
 html = open(os.path.join(HERE, "review_form_template.html"), encoding="utf-8").read()
-html = (html.replace("__DATA__", json.dumps(DATA, ensure_ascii=False))
+html = (html.replace("__THUMBS__", json.dumps(THUMBS))
+            .replace("__DATA__", json.dumps(DATA, ensure_ascii=False))
             .replace("__VIDEO__", VIDEO).replace("__V__", V)
             .replace("__TOTAL__", f"{int(total // 60)}:{total % 60:05.2f}")
             .replace("__N__", str(len(DATA))))
