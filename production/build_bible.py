@@ -36,7 +36,7 @@ PROMPTS = {}
 
 
 # key -> approved file name in refs_generated
-APPROVED = {"REF_crown": "REF_crown_v1.png", "REF_king": "REF_king_v2.png"}
+APPROVED = {"REF_crown": "REF_crown_v1.png", "REF_king": "REF_king_v2.png", "REF_prince": "REF_prince_v2.png", "REF_alter_rebbe": "REF_alter_rebbe_v2.png"}
 
 
 def sheet(key, title, prompt, refs_note):
