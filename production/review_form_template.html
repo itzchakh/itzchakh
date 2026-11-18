@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>טופס תיקונים: היהלום שבכתר</title>
+<style>
+:root{--bg:#f4f2ee;--card:#fff;--ink:#23211d;--mut:#6d675d;--line:#dcd7cd;--accent:#1b6f8a;--gold:#a87a12;--ok:#2d7a4b;--fix:#b0730a;--rep:#b23a2e;--okb:#e3f1e8;--fixb:#f9eed8;--repb:#f8e3df;--soft:#eef4f6}
+@media (prefers-color-scheme:dark){:root{--bg:#191816;--card:#24221f;--ink:#efece6;--mut:#a9a297;--line:#3b3833;--accent:#5fc3e0;--gold:#e2b84f;--ok:#6cc28f;--fix:#e2ad4f;--rep:#ee8275;--okb:#20352a;--fixb:#3a2f19;--repb:#3f2420;--soft:#1f2a2e}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Segoe UI",Arial,sans-serif}
+.wrap{max-width:1240px;margin:0 auto;padding:20px 16px 90px}
+h1{font-size:26px;margin:0 0 4px}
+h2{font-size:19px;margin:28px 0 10px}
+.sub{color:var(--mut);margin:0 0 14px}
+.top{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:18px;align-items:start;position:sticky;top:0;z-index:5;background:var(--bg);padding-bottom:10px}
+video{width:100%;border-radius:8px;background:#000;display:block;max-height:46vh}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.counts{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px}
+.counts button{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:8px;padding:6px 4px;cursor:pointer;font:inherit;font-size:13.5px}
+.counts button b{display:block;font-size:20px;line-height:1.1}
+.counts button.on{outline:2px solid var(--accent)}
+.segsel{display:flex;gap:6px;margin-bottom:10px;font-size:14px;flex-wrap:wrap}
+.segsel button{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:20px;padding:3px 10px;cursor:pointer;font:inherit;font-size:13.5px}
+.segsel button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn{border:1px solid var(--accent);background:var(--accent);color:#fff;border-radius:7px;padding:7px 12px;font:inherit;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--accent)}
+.saved{color:var(--mut);font-size:13px;align-self:center}
+.act{font-weight:700;margin:26px 0 8px;color:var(--gold);font-size:18px}
+.shot{background:var(--card);border:1px solid var(--line);border-inline-start:6px solid var(--ok);border-radius:10px;padding:12px 14px;margin-bottom:14px}
+.shot.fix{border-inline-start-color:var(--fix)}.shot.replace{border-inline-start-color:var(--rep)}
+.shot.playing{box-shadow:0 0 0 2px var(--accent)}
+.head{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;margin-bottom:6px}
+.num{font-size:22px;font-weight:800}
+.meta{color:var(--mut);font-size:14px}
+.tag{font-size:12.5px;border-radius:12px;padding:1px 8px;background:var(--soft);color:var(--accent);border:1px solid var(--line)}
+.tag.lip{background:var(--fixb);color:var(--fix)}
+.ltr{direction:ltr;unicode-bidi:isolate}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:14px}
+.imgs{display:grid;gap:6px}
+.imgs .row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:6px}
+.imgs figure{margin:0}
+.imgs img{width:100%;display:block;border-radius:6px;cursor:zoom-in;border:1px solid var(--line)}
+.imgs figcaption{font-size:12.5px;color:var(--mut)}
+.nar{background:var(--soft);border-radius:8px;padding:8px 10px;margin:6px 0 8px;font-size:15px}
+.nar .l{margin:2px 0}
+.nar .l small{color:var(--mut)}
+.fields p{margin:0 0 5px;font-size:14.5px}
+.fields details{font-size:14px;margin:4px 0}
+.fields summary{cursor:pointer;color:var(--accent)}
+.prompt{direction:ltr;text-align:left;font-family:Consolas,monospace;font-size:12.5px;background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:6px;white-space:pre-wrap}
+.link{background:none;border:0;color:var(--accent);padding:2px 0;font:inherit;cursor:pointer;text-decoration:underline}
+.rev{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:10px}
+.box{border:1px solid var(--line);border-radius:8px;padding:8px}
+.box h4{margin:0 0 6px;font-size:15px}
+.box.fix{background:var(--fixb)}.box.replace{background:var(--repb)}
+.seg{display:flex;gap:4px;margin-bottom:6px}
+.seg label{flex:1;text-align:center;border:1px solid var(--line);border-radius:6px;padding:4px 2px;cursor:pointer;font-size:13.5px;background:var(--card)}
+.seg input{position:absolute;opacity:0}
+.seg label:has(input:focus-visible){outline:2px solid var(--accent)}
+.seg label.ok.on{background:var(--okb);border-color:var(--ok);color:var(--ok);font-weight:700}
+.seg label.fix.on{background:var(--fixb);border-color:var(--fix);color:var(--fix);font-weight:700}
+.seg label.replace.on{background:var(--repb);border-color:var(--rep);color:var(--rep);font-weight:700}
+.flags{display:flex;flex-wrap:wrap;gap:2px 10px;font-size:13px;margin-bottom:6px}
+.flags label{cursor:pointer}
+textarea{width:100%;min-height:74px;border:1px solid var(--line);border-radius:6px;padding:6px;font:inherit;font-size:14.5px;background:var(--card);color:var(--ink);resize:vertical}
+#gen{min-height:90px}
+.lb{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:50;cursor:zoom-out}
+.lb img{max-width:96vw;max-height:94vh;border-radius:6px}
+@media (max-width:980px){.rev{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:820px){.top,.grid{grid-template-columns:minmax(0,1fr)}.top{position:static}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>טופס תיקונים: היהלום שבכתר · סטוריבורד, קריינות ותמונות</h1>
+<p class="sub">כרטיס לכל שוט (__N__ שוטים, __TOTAL__): התזמון, שורות הקריינות עם הדובר והקול, חמשת השדות של הסטוריבורד, הפרומפט, הרפרנסים, ותמונות הפתיחה והסיום. בכל כרטיס יש שלושה חלקים נפרדים לריג'קטים: <b>סטוריבורד</b>, <b>קריינות</b> ו<b>תמונות</b>. הכול מסומן כרגע "תקין", עם הערות שלי היכן שבחרתי משהו לבד. לחיצה על "▶ נגן את השוט" מנגנת את הקטע מהגרסה הגסה. הכול נשמר אוטומטית בדפדפן, ובסיום לוחצים "הורדת הטופס המלא".</p>
+<div class="top">
+<div><video id="v" controls preload="metadata" src="../rough/__VIDEO__"></video><p class="sub" style="margin:6px 0 0;font-size:13px">הגרסה הגסה: התמונות על הקריינות, לפי תזמון הסטוריבורד. הקובץ צריך להישאר בתיקייה rough ליד תיקיית הטופס.</p></div>
+<div class="panel">
+<div class="segsel" id="segsel"></div>
+<div class="counts" id="counts"></div>
+<div class="actions">
+<button class="btn" id="dl">הורדת הטופס המלא</button>
+<button class="btn ghost" id="cp">העתקה</button>
+<button class="btn ghost" id="clr">איפוס</button>
+<span class="saved" id="saved"></span>
+</div>
+<p class="sub" style="margin:8px 0 0;font-size:13px">בסיום: הורד את הקובץ ושלח לי את הנתיב, או הדבק לי את הטקסט המועתק.</p>
+</div>
+</div>
+<h2>הערות כלליות</h2>
+<div class="panel"><textarea id="gen" placeholder="הערות על הסרט כולו: קצב, סגנון, צבע, מוזיקה, משהו שחוזר בהרבה שוטים..."></textarea></div>
+<div id="list"></div>
+</div>
+<div class="lb" id="lb"><img id="lbimg" alt=""></div>
+<script>
+const DATA=__DATA__;
+const KEY='diamond_review_v__V__';
+const SEGS={sb:'סטוריבורד',nar:'קריינות',img:'תמונות'};
+const LABEL={ok:'תקין',fix:'תיקון',replace:'להחליף'};
+const FLAGS={
+ sb:['תזמון/אורך','קומפוזיציה','תנועת מצלמה','תאורה','צד מסך','תוכן הסצנה','לפצל/לאחד','חסר שוט'],
+ nar:['הגייה','ניקוד','טון/רגש','קצב','עוצמה','הפסקה','טקסט לשנות','להקליט מחדש'],
+ img:['דמות לא עקבית','פנים/הבעה','בגדים','כיסוי ראש','כתר/יהלום','סמל אסור','טקסט בתמונה','רקע/לוקיישן','תאורה/צבע','צניעות','פריים פתיחה מחדש','פריים סיום מחדש','להוסיף פריים סיום']
+};
+let state={};try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
+const get=(d,k)=>{state[d.id]=state[d.id]||{};const s=state[d.id];if(!s[k])s[k]={status:'ok',flags:[],note:d.notes[k]||''};return s[k]};
+const fmt=t=>{const m=Math.floor(t/60),s=(t%60).toFixed(2).padStart(5,'0');return m+':'+s};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const worst=d=>{const r=['ok','fix','replace'];return Object.keys(SEGS).map(k=>get(d,k).status).reduce((a,b)=>r.indexOf(b)>r.indexOf(a)?b:a,'ok')};
+const v=document.getElementById('v');
+let filter='all',segf='all',stopAt=null,cur=null;
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state));document.getElementById('saved').textContent='נשמר'}catch(e){document.getElementById('saved').textContent='השמירה האוטומטית לא זמינה: הורד את הטופס בסוף'}}
+v.addEventListener('timeupdate',()=>{if(stopAt!==null&&v.currentTime>=stopAt){v.pause();stopAt=null}});
+function play(d,el){v.currentTime=d.start;stopAt=d.end;v.play();document.querySelectorAll('.shot.playing').forEach(x=>x.classList.remove('playing'));el.classList.add('playing')}
+function imgFig(f,cap){return `<figure><img loading="lazy" src="../frames/${esc(f)}" alt="${esc(cap)}" data-full="../frames/${esc(f)}"><figcaption>${esc(cap)} · ${esc(f)}</figcaption></figure>`}
+function segBox(d,k){
+ const s=get(d,k);
+ return `<div class="box ${s.status}" data-k="${k}"><h4>${SEGS[k]}</h4>
+ <div class="seg">${['ok','fix','replace'].map(x=>`<label class="${x} ${s.status===x?'on':''}"><input type="radio" name="${d.id}_${k}" value="${x}" ${s.status===x?'checked':''}>${LABEL[x]}</label>`).join('')}</div>
+ <div class="flags">${FLAGS[k].map(f=>`<label><input type="checkbox" value="${f}" ${s.flags.includes(f)?'checked':''}> ${f}</label>`).join('')}</div>
+ <textarea placeholder="ריג'קט / הערה על ה${SEGS[k]} של ${d.id}">${esc(s.note)}</textarea></div>`;
+}
+function render(){
+ const list=document.getElementById('list');list.innerHTML='';let last='';
+ DATA.forEach(d=>{
+  const st=segf==='all'?worst(d):get(d,segf).status;
+  if(filter!=='all'&&st!==filter)return;
+  if(d.act!==last){const h=document.createElement('div');h.className='act';h.textContent=d.act;list.appendChild(h);last=d.act}
+  const c=document.createElement('section');c.className='shot '+worst(d);c.id='shot-'+d.id;
+  const nar=d.nar.length?d.nar.map(n=>`<p class="l"><b>${esc(n.spk)}</b> <small>(${esc(n.voice)} · ${esc(n.id)} · <span class="ltr">${n.t}</span>)</small>: ${esc(n.text)}</p>`).join(''):'<p class="l"><small>אין נרציה בשוט הזה</small></p>';
+  c.innerHTML=`<div class="head"><span class="num">${d.id}</span>
+   <span class="meta"><span class="ltr">${fmt(d.start)} – ${fmt(d.end)}</span> · <span class="ltr">${(d.end-d.start).toFixed(1)}</span> שנ'</span>
+   ${d.lip?'<span class="tag lip">ליפסינק</span>':'<span class="tag">קריינות</span>'}
+   ${d.speakers.map(s=>`<span class="tag">${esc(s)}</span>`).join('')}
+   ${d.last_img.length?'<span class="tag">פתיחה + סיום</span>':''}
+   <button class="link play">▶ נגן את השוט</button></div>
+  <div class="grid">
+   <div class="imgs"><div class="row">${d.first_img.map((f,i)=>imgFig(f,d.first_img.length>1?'שוט '+(i+1):'פריים פתיחה')).join('')}</div>
+    ${d.last_img.length?`<div class="row">${d.last_img.map(f=>imgFig(f,'פריים סיום')).join('')}</div>`:''}</div>
+   <div class="fields"><div class="nar">${nar}</div>
+    <p><b>תיאור הסצנה:</b> ${esc(d.scene)}</p>
+    <details><summary>פריים ראשון, תנועה ותאורה</summary><p><b>פריים ראשון:</b> ${esc(d.first)}</p><p><b>תנועה ואנימציה:</b> ${esc(d.motion)}</p><p><b>תאורה:</b> ${esc(d.light)}</p></details>
+    <details><summary>פרומפט ורפרנסים</summary><p><b>רפרנסים:</b> <span class="ltr">${d.refs.map(esc).join(', ')||'—'}</span></p><div class="prompt">${esc(d.prompt)}</div></details>
+   </div></div>
+  <div class="rev">${Object.keys(SEGS).map(k=>segBox(d,k)).join('')}</div>`;
+  c.querySelector('.play').onclick=()=>play(d,c);
+  c.querySelectorAll('img').forEach(i=>i.onclick=()=>{document.getElementById('lbimg').src=i.dataset.full;document.getElementById('lb').style.display='flex'});
+  c.querySelectorAll('.box').forEach(b=>{const k=b.dataset.k;
+   b.querySelectorAll('.seg input').forEach(i=>i.onchange=()=>{get(d,k).status=i.value;save();render();counts()});
+   b.querySelectorAll('.flags input').forEach(i=>i.onchange=()=>{get(d,k).flags=[...b.querySelectorAll('.flags input:checked')].map(e=>e.value);save()});
+   b.querySelector('textarea').oninput=e=>{get(d,k).note=e.target.value;save()};
+  });
+  list.appendChild(c);
+ });
+}
+function counts(){
+ const ss=document.getElementById('segsel');ss.innerHTML='';
+ [['all','כל החלקים'],...Object.entries(SEGS)].forEach(([k,n])=>{const b=document.createElement('button');b.className=segf===k?'on':'';b.textContent=n;b.onclick=()=>{segf=k;counts();render()};ss.appendChild(b)});
+ const n={all:DATA.length,replace:0,fix:0,ok:0};DATA.forEach(d=>n[segf==='all'?worst(d):get(d,segf).status]++);
+ const names={all:'הכול',replace:'להחליף',fix:'תיקון',ok:'תקין'};
+ const el=document.getElementById('counts');el.innerHTML='';
+ ['all','replace','fix','ok'].forEach(k=>{const b=document.createElement('button');b.className=filter===k?'on':'';b.innerHTML=`<b>${n[k]}</b>${names[k]}`;b.onclick=()=>{filter=k;counts();render()};el.appendChild(b)});
+}
+function asText(){
+ let t='טופס תיקונים: היהלום שבכתר, סבב __V__\n\n';
+ const g=state.general||'';if(g)t+='הערות כלליות: '+g+'\n\n';
+ const sum={};Object.keys(SEGS).forEach(k=>{sum[k]={fix:0,replace:0}});
+ DATA.forEach(d=>Object.keys(SEGS).forEach(k=>{const s=get(d,k);if(s.status!=='ok')sum[k][s.status]++}));
+ t+='סיכום: '+Object.entries(SEGS).map(([k,n])=>`${n}: ${sum[k].replace} להחליף, ${sum[k].fix} תיקון`).join(' | ')+'\n\n';
+ Object.entries(SEGS).forEach(([k,n])=>{
+  t+=`===== ${n} =====\n`;let any=false;
+  DATA.forEach(d=>{const s=get(d,k);
+   if(s.status==='ok'&&!s.flags.length&&!s.note)return;
+   any=true;t+=`${d.id} [${LABEL[s.status]}]`;if(s.flags.length)t+=' ('+s.flags.join(', ')+')';if(s.note)t+=': '+s.note.replace(/\n/g,' ');t+='\n'});
+  if(!any)t+='הכול תקין\n';t+='\n';
+ });
+ return t;
+}
+const gn=document.getElementById('gen');gn.value=state.general||'';gn.oninput=()=>{state.general=gn.value;save()};
+document.getElementById('dl').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([asText()],{type:'text/plain;charset=utf-8'}));a.download='טופס_תיקונים_היהלום_שבכתר_v__V___מלא.txt';a.click()};
+document.getElementById('cp').onclick=async e=>{try{await navigator.clipboard.writeText(asText());e.target.textContent='הועתק'}catch(x){e.target.textContent='לא הועתק: השתמש בהורדה'}};
+document.getElementById('clr').onclick=()=>{if(confirm('לאפס את כל ההערות בטופס?')){state={};save();gn.value='';counts();render()}};
+document.getElementById('lb').onclick=()=>{document.getElementById('lb').style.display='none'};
+counts();render();
+</script>
+</body>
+</html>

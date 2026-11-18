@@ -1,0 +1,66 @@
+shot_id,sb,part,act,type,start,end,img
+R001,S001,first,הוק,narration,0.00,3.47,S001_v1.png
+R002,S001,last,הוק,narration,3.47,6.31,S001_last_v1.png
+R003,S002,,הוק,narration,6.31,13.12,S002_v1.png
+R004,S003,first,א. הממלכה המנגנת,narration,13.12,17.62,S003_v1.png
+R005,S003,last,א. הממלכה המנגנת,narration,17.62,21.31,S003_last_v1.png
+R006,S004,,א. הממלכה המנגנת,narration,21.31,27.29,S004_v1.png
+R007,S005,,א. הממלכה המנגנת,narration,27.29,33.28,S005_v1.png
+R008,S006,first,א. הממלכה המנגנת,narration,33.28,38.84,S006_v1.png
+R009,S006,last,א. הממלכה המנגנת,narration,38.84,43.39,S006_last_v1.png
+R010,S007,,א. הממלכה המנגנת,narration,43.39,46.35,S007_v1.png
+R011,S008,,א. הממלכה המנגנת,narration,46.35,53.71,S008_v1.png
+R012,S009,first,א. הממלכה המנגנת,narration,53.71,57.76,S009_v1.png
+R013,S009,last,א. הממלכה המנגנת,narration,57.76,61.07,S009_last_v1.png
+R014,S010,,א. הממלכה המנגנת,narration,61.07,70.18,S010_v1.png
+R015,S011,,א. הממלכה המנגנת,lipsync,70.18,76.26,S011_v1.png
+R016,S012,,ב. השתיקה,narration,76.26,83.37,S012_v1.png
+R017,S013,,ב. השתיקה,narration,83.37,90.58,S013_v1.png
+R018,S014,first,ב. השתיקה,narration,90.58,94.39,S014_first_v1.png
+R019,S014,last,ב. השתיקה,narration,94.39,97.51,S014_v1.png
+R020,S015,,ב. השתיקה,narration,97.51,105.04,S015_v1.png
+R021,S016a,,ג. מועצת הרופאים,narration,105.04,112.04,S016a_v1.png
+R022,S016b,,ג. מועצת הרופאים,narration,112.04,119.60,S016b_v1.png
+R023,S017,,ג. מועצת הרופאים,lipsync,119.60,124.55,S017_v1.png
+R024,S018a,,ג. מועצת הרופאים,lipsync,124.55,130.55,S018a_v1.png
+R025,S018b,,ג. מועצת הרופאים,lipsync,130.55,136.55,S018b_v1.png
+R026,S019,,ג. מועצת הרופאים,lipsync,136.59,144.79,S019_v1.png
+R027,S020,,ד. ההחלטה,narration,144.79,154.39,S020_v1.png
+R028,S021,,ד. ההחלטה,lipsync,154.39,162.20,S021_v1.png
+R029,S022,,ד. ההחלטה,lipsync,162.20,169.45,S022_v1.png
+R030,S023,,ד. ההחלטה,lipsync,169.45,171.19,S023_v1.png
+R031,S024,first,ה. התרופה,narration,171.19,176.22,S024_v1.png
+R032,S024,last,ה. התרופה,narration,176.22,180.33,S024_last_v1.png
+R033,S025,first,ה. התרופה,narration,180.33,184.46,S025_v1.png
+R034,S025,last,ה. התרופה,narration,184.46,187.84,S025_last_v1.png
+R035,S026,,ה. התרופה,lipsync,187.84,195.37,S026_v1.png
+R036,S027,first,ה. התרופה,narration,195.37,196.47,S027_v1.png
+R037,S027,last,ה. התרופה,narration,196.47,197.37,S027_last_v1.png
+R038,S028,,ה. התרופה,lipsync,197.37,201.32,S028_v1.png
+R039,S029,first,ה. התרופה,narration,201.32,204.61,S029_v1.png
+R040,S029,last,ה. התרופה,narration,204.61,207.31,S029_last_v1.png
+R041,S030,first,ה. התרופה,narration,207.31,210.60,S030_v1.png
+R042,S030,last,ה. התרופה,narration,210.60,213.30,S030_last_v1.png
+R043,S031,first,ה. התרופה,narration,213.30,216.09,S031_v1.png
+R044,S031,last,ה. התרופה,narration,216.09,218.37,S031_last_v1.png
+R045,S032a,first,ו. הנמשל,narration,218.37,221.67,S032a_v1.png
+R046,S032a,last,ו. הנמשל,narration,221.67,224.37,S032a_last_v1.png
+R047,S032b,first,ו. הנמשל,narration,224.37,227.59,S032b_v1.png
+R048,S032b,last,ו. הנמשל,narration,227.59,230.22,S032b_last_v1.png
+R049,S033,,ו. הנמשל,narration,230.22,237.59,S033_v1.png
+R050,S034,,ו. הנמשל,narration,237.59,244.30,S034_v1.png
+R051,S035,first,ו. הנמשל,narration,244.30,247.99,S035_v1.png
+R052,S035,last,ו. הנמשל,narration,247.99,251.01,S035_last_v1.png
+R053,S036,,ו. הנמשל,narration,251.01,256.15,S036_v1.png
+R054,S037,,ו. הנמשל,narration,256.15,262.32,S037_v1.png
+R055,S038,first,ו. הנמשל,narration,262.32,265.72,S038_v1.png
+R056,S038,last,ו. הנמשל,narration,265.72,268.50,S038_last_v1.png
+R057,S039,first,ו. הנמשל,narration,268.50,271.45,S039_v1.png
+R058,S039,last,ו. הנמשל,narration,271.45,273.87,S039_last_v1.png
+R059,S040,,ו. הנמשל,narration,273.87,279.83,S040_v1.png
+R060,S041a,,סיום,narration,279.83,285.13,S041a_v1.png
+R061,S041b1,,סיום,narration,285.13,286.88,S041b1_v1.png
+R062,S041b2,,סיום,narration,286.88,288.64,S041b2_v1.png
+R063,S041b3,,סיום,narration,288.64,290.39,S041b3_v1.png
+R064,S042,first,סיום,narration,290.39,294.34,S042_v1.png
+R065,S042,last,סיום,narration,294.34,297.58,S042_last_v1.png
