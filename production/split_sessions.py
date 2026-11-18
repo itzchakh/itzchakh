@@ -16,9 +16,11 @@ ap = argparse.ArgumentParser()
 ap.add_argument("--in", dest="inp", required=True)
 ap.add_argument("--out", required=True)
 ap.add_argument("--noise-db", type=float, default=-38)
+ap.add_argument("--sessions", default=os.path.join(HERE, "tts_sessions", "sessions.json"))
+ap.add_argument("--script", default=os.path.join(HERE, "script.txt"))
 a = ap.parse_args()
-sessions = json.load(open(os.path.join(HERE, "tts_sessions", "sessions.json"), encoding="utf-8"))
-lines = parse_script(os.path.join(HERE, "script.txt"))
+sessions = json.load(open(a.sessions, encoding="utf-8"))
+lines = parse_script(a.script)
 os.makedirs(a.out, exist_ok=True)
 files = {}
 for f in os.listdir(a.inp):
@@ -26,7 +28,7 @@ for f in os.listdir(a.inp):
     if m and f.lower().endswith((".wav", ".mp3", ".m4a", ".ogg", ".flac", ".aac", ".webm")):
         files[int(m.group(1))] = os.path.join(a.inp, f)
 ok = True
-for n, s in enumerate(sessions, 1):
+for n, s in ((s.get("n", k), s) for k, s in enumerate(sessions, 1)):
     if n not in files:
         print(f"MISSING session {n:02d} ({s['file']})"); ok = False; continue
     want = [{"text": lines[i - 1][1]} for i in s["lines"]]

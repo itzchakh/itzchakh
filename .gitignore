@@ -2,3 +2,4 @@ production/prompts_tmp/
 __pycache__/
 production/audio_test/
 production/audio_lines_api_test/
+production/downloads_v2/

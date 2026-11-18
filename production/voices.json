@@ -1,11 +1,26 @@
 {
   "_note": "Gemini TTS voices and style per speaker. 'pron' replaces words only in the text sent to TTS (subtitles keep the plain spelling).",
   "voices": {
-    "קריינות": {"voice": "Charon", "style": "Read this in Hebrew as a warm, deep, unhurried fairy-tale storyteller for a family animated film. Calm pace, gentle pauses at commas, a sense of wonder."},
-    "המלך": {"voice": "Orus", "style": "Read this in Hebrew as a loving, tired king, about 50, speaking softly with quiet resolve."},
-    "הנסיך": {"voice": "Puck", "style": "Read this in Hebrew as a 12-year-old boy, bright and joyful (or weak and whispering if the line has an ellipsis after 'אבא')."},
-    "הרופא הראשי": {"voice": "Algenib", "style": "Read this in Hebrew as an old, gentle, hesitant royal physician, about 70, delivering grave news carefully."},
-    "היועץ": {"voice": "Iapetus", "style": "Read this in Hebrew as a loyal but alarmed royal counselor, about 45, urgent and worried."}
+    "קריינות": {
+      "voice": "Charon",
+      "style": "Read this in Hebrew as a warm, deep, unhurried fairy-tale storyteller for a family animated film. Calm pace, gentle pauses at commas, a sense of wonder."
+    },
+    "המלך": {
+      "voice": "Orus",
+      "style": "Read this in Hebrew as a loving, tired king, about 50, speaking softly with quiet resolve."
+    },
+    "הנסיך": {
+      "voice": "Puck",
+      "style": "Read this in Hebrew as a 12-year-old boy, bright and joyful (or weak and whispering if the line has an ellipsis after 'אבא')."
+    },
+    "הרופא הראשי": {
+      "voice": "Algenib",
+      "style": "Read this in Hebrew as an old, gentle, hesitant royal physician, about 70, delivering grave news carefully."
+    },
+    "היועץ": {
+      "voice": "Iapetus",
+      "style": "Read this in Hebrew as a loyal but alarmed royal counselor, about 45, urgent and worried."
+    }
   },
   "pron": {
     "אדמו\"ר": "אַדְמוֹ״ר",
@@ -27,6 +42,14 @@
     "מלכו של עולם": "מַלְכּוֹ שֶׁל עוֹלָם",
     "היקר מכל": "הַיָּקָר מִכֹּל",
     "שבזכותו": "שֶׁבִּזְכוּתוֹ",
-    "שרה ממלכה": "שָׁרָה מַמְלָכָה"
+    "שרה ממלכה": "שָׁרָה מַמְלָכָה",
+    "נשפכו": "נִשְׁפְּכוּ",
+    "להישפך": "לְהִישָּׁפֵךְ",
+    "והומס": "וְהוּמַס",
+    "יפוצו": "יָפוּצוּ",
+    "זלגו": "זָלְגוּ",
+    "הטו": "הִטּוּ",
+    "שתגיע": "שֶׁתַּגִּיעַ",
+    "נחלשה": "נֶחְלְשָׁה"
   }
 }
