@@ -45,7 +45,9 @@ def parse_script(path):
                 act = s.lstrip("#").strip()
                 continue
             speaker, text = "קריינות", s
-            m = re.match(r"^\**([^:\"״]{1,30}?)\**\s*:\s*(.+)$", s)
+            m = re.match(r"^\**([^:\"״,،]{1,30}?)\**\s*:\s*(.+)$", s)
+            if m and len(m.group(1).split()) > 3:
+                m = None
             if m:
                 speaker, text = m.group(1).strip(), m.group(2).strip()
                 if speaker.lower() in NARRATOR_NAMES:

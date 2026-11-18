@@ -69,7 +69,9 @@ def parse_script(path):
         if not s or s.startswith("//") or s.startswith("#"):
             continue
         spk, text = NARRATOR, s
-        m = re.match(r"^\**([^:\"״]{1,30}?)\**\s*:\s*(.+)$", s)
+        m = re.match(r"^\**([^:\"״,،]{1,30}?)\**\s*:\s*(.+)$", s)
+        if m and len(m.group(1).split()) > 3:
+            m = None
         if m:
             spk, text = m.group(1).strip(), m.group(2).strip()
         lines.append((spk, text))
