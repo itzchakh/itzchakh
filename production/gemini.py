@@ -91,7 +91,9 @@ def tts(a):
         t = text
         for k, rep in sorted(cfg.get("pron", {}).items(), key=lambda kv: -len(kv[0])):
             t = t.replace(k, rep)
-        prompt = f"{v['style']}\n\n{t}"
+        # keep direction separate so newer TTS models don't read it aloud
+        prompt = (f"### DIRECTOR'S NOTES (do not read aloud)\n{v['style']}\n\n"
+                  f"### TRANSCRIPT (read only this)\n{t}")
         for take in range(1, a.takes + 1):
             r = call("POST", f"models/{model}:generateContent", {
                 "contents": [{"parts": [{"text": prompt}]}],
@@ -99,13 +101,18 @@ def tts(a):
                                      "speechConfig": {"voiceConfig": {"prebuiltVoiceConfig": {"voiceName": v["voice"]}}}}})
             part = r["candidates"][0]["content"]["parts"][0]["inlineData"]
             pcm = base64.b64decode(part["data"])
-            rate = int(re.search(r"rate=(\d+)", part.get("mimeType", "rate=24000")).group(1))
+            mime = part.get("mimeType", "")
             suffix = "" if a.takes == 1 else f"_t{take}"
             out = os.path.join(a.out, f"line_{i:02d}{suffix}.wav")
             raw = out + ".pcm"
             open(raw, "wb").write(pcm)
+            m = re.search(r"rate=(\d+)", mime)
+            if "wav" in mime:  # newer models return a WAV container
+                inp = ["-i", raw]
+            else:  # raw 16-bit PCM
+                inp = ["-f", "s16le", "-ar", m.group(1) if m else "24000", "-ac", "1", "-i", raw]
             # trim leading/trailing silence, keep 80 ms
-            subprocess.run(["ffmpeg", "-y", "-v", "error", "-f", "s16le", "-ar", str(rate), "-ac", "1", "-i", raw,
+            subprocess.run(["ffmpeg", "-y", "-v", "error", *inp,
                             "-af", "silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.08,"
                                    "areverse,silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.12,areverse",
                             out], check=True)

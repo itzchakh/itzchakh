@@ -95,7 +95,7 @@ def from_clips(lines, clips_dir, out_dir, gap, act_gap, lead):
             g = act_gap if lines[i + 1]["act"] != ln["act"] else gap
             parts.append(silence(g))
             t += g
-    with open(concat_list, "w") as f:
+    with open(concat_list, "w", encoding="utf-8") as f:
         for p in parts:
             f.write(f"file '{os.path.abspath(p)}'\n")
     master = os.path.join(out_dir, "narration_master.wav")
